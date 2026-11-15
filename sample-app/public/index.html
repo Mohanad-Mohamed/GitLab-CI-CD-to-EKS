@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitLab CI/CD Sample App</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 800px;
+      padding: 2rem;
+    }
+
+    .title {
+      font-size: 60px;
+      font-weight: bold;
+      background: linear-gradient(90deg, #ff7e5f, #feb47b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: glow 2s ease-in-out infinite alternate;
+      margin-bottom: 1rem;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+      }
+      to {
+        text-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+      }
+    }
+
+    .branding {
+      margin-top: 15px;
+      font-size: 18px;
+      color: #ccc;
+    }
+
+    .branding strong {
+      color: #00ffd5;
+    }
+
+    .info-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 2rem;
+      margin-top: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .info-item {
+      margin: 1rem 0;
+      font-size: 18px;
+      color: #ddd;
+    }
+
+    .info-item .label {
+      color: #00ffd5;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .info-item .value {
+      color: #fff;
+      font-family: 'Courier New', monospace;
+    }
+
+    .loading {
+      color: #feb47b;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    .footer {
+      margin-top: 2rem;
+      font-size: 14px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">GitLab CI/CD Mastery</div>
+
+    <div class="branding">
+      Powered by <strong>DolfinED</strong><br>
+      Instructor: <strong>Mena Magdy Halem</strong>
+    </div>
+
+    <div class="info-card">
+      <div class="info-item">
+        <span class="label">Image:</span>
+        <span class="value" id="imageName"><span class="loading">Loading...</span></span>
+      </div>
+      <div class="info-item">
+        <span class="label">Environment:</span>
+        <span class="value" id="environment"><span class="loading">Loading...</span></span>
+      </div>
+      <div class="info-item">
+        <span class="label">Last Updated:</span>
+        <span class="value" id="timestamp"><span class="loading">Loading...</span></span>
+      </div>
+    </div>
+
+    <div class="footer">
+      This application demonstrates GitLab CI/CD pipelines
+    </div>
+  </div>
+
+  <script>
+    fetch("/api/image")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("imageName").textContent = data.image;
+        document.getElementById("environment").textContent = data.environment;
+        document.getElementById("timestamp").textContent = new Date(data.timestamp).toLocaleString();
+      })
+      .catch(error => {
+        document.getElementById("imageName").textContent = "Error loading data";
+        console.error("Error:", error);
+      });
+  </script>
+</body>
+</html>

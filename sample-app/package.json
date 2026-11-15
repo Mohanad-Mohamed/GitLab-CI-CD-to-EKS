@@ -1,0 +1,26 @@
+{
+  "name": "gitlab-cicd-sample-app",
+  "version": "1.0.0",
+  "description": "Sample Node.js application for GitLab CI/CD demonstrations",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [
+    "gitlab",
+    "cicd",
+    "nodejs",
+    "express"
+  ],
+  "author": "Mena Magdy Halem",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
